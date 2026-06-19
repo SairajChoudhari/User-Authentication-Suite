@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Authentication Suite</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            background:#f0f0f0;
+        }
+        .container{
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            width:300px;
+            box-shadow:0 0 10px gray;
+        }
+        input{
+            width:100%;
+            padding:10px;
+            margin:10px 0;
+            box-sizing:border-box;
+        }
+        button{
+            width:100%;
+            padding:10px;
+            background:#007bff;
+            color:white;
+            border:none;
+            cursor:pointer;
+        }
+        button:hover{
+            background:#0056b3;
+        }
+        p{
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>User Authentication</h2>
+
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="signup()">Sign Up</button>
+    <br><br>
+    <button onclick="login()">Login</button>
+
+    <p id="message"></p>
+</div>
+
+<script>
+function signup() {
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+
+    if(username === "" || password === "") {
+        document.getElementById("message").innerHTML = "Fill all fields";
+        return;
+    }
+
+    localStorage.setItem("username", username);
+    localStorage.setItem("password", password);
+
+    document.getElementById("message").innerHTML = "Registration Successful";
+}
+
+function login() {
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+
+    let storedUser = localStorage.getItem("username");
+    let storedPass = localStorage.getItem("password");
+
+    if(username === storedUser && password === storedPass) {
+        document.getElementById("message").innerHTML = "Login Successful";
+    } else {
+        document.getElementById("message").innerHTML = "Invalid Username or Password";
+    }
+}
+</script>
+
+</body>
+</html>
